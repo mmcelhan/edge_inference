@@ -1,0 +1,16 @@
+FROM alpine
+
+RUN apk update
+
+RUN apk add -f py-pip vim-tiny mosquitto-clients git curl python-numpy
+
+RUN apk add -f py3-pip python3-numpy
+
+RUN pip install paho-mqtt
+
+WORKDIR /
+
+COPY car_class.py /car_class.py
+
+ENTRYPOINT ["python", "car_class.py"]
+
