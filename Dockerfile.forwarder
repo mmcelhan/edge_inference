@@ -2,16 +2,16 @@ FROM alpine
 
 RUN apk update
 
-RUN apk add -f py-pip vim-tiny mosquitto-clients git curl python-numpy
+RUN apk add -f py3-pip vim-tiny mosquitto-clients git curl python-numpy
 
-RUN apk add -f py3-pip python3-numpy
+RUN apk add -f py3-pip python3-numpy simplejson
 
-RUN pip install paho-mqtt
+RUN pip3 install paho-mqtt simplejson
 
 WORKDIR /
 
 COPY car_class.py /car_class.py
 COPY keys.json /keys.json
 
-ENTRYPOINT ["python", "car_class.py"]
+ENTRYPOINT ["python3", "car_class.py"]
 

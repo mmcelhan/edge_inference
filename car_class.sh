@@ -1,4 +1,4 @@
-sudo docker create --name forwarder --network hw3 -t -i ab69d63b347d
+sudo docker create --name forwarder --network car -t -i ab69d63b347d
 sudo docker network connect bridge forwarder 
 sudo docker exec exit
 sudo docker start forwarder
