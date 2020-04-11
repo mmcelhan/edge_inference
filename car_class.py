@@ -3,8 +3,13 @@ import sys
 
 local_broker = "broker"  # broker is host name
 local_port = 1883  # standard mqtt port
-local_topic = "car"  # topic is image
+local_topic = "signs"  # topic is image
 
+with open("keys.json") as json_file:
+    data = json.load(json_file)
+    keys = {}
+    for i in range(len(data)):
+        keys[i] = data[str(i)]
 
 # dictionary of signs
 signs = {
@@ -133,9 +138,10 @@ def on_message(msg):
     except:
         print("Unexpected error:", sys.exc_info()[0])
 
-
+ 
+        
 car = Car()
-local_mqttclient = mqtt.Client("camera")  # instantiate local client
+local_mqttclient = mqtt.Client()  # instantiate local client
 local_mqttclient.on_connect = on_connect_local  # connect using function call
 local_mqttclient.connect(local_broker, local_port, 60)  # connect with inputs
 local_mqttclient.on_message = on_message  # execute when message is received
