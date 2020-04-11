@@ -13,65 +13,45 @@ with open("keys.json") as json_file:
 
 # dictionary of signs
 signs = {
-    1: {
-        "label": "stop_sign",
-        "speed": 0
+    "30": {
+        "label": "30_kph",
+        "speed":30
     },
-    2: {
-        "label": "5_mph",
-        "speed": 5
+    "50": {
+        "label": "50_kph",
+        "speed":50
     },
-    3: {
-        "label": "10_mph",
-        "speed": 10
-    },
-    4: {
-        "label": "15_mph",
-        "speed": 15
-    },
-    5: {
-        "label": "20_mph",
-        "speed": 20
-    },
-    6: {
-        "label": "25_mph",
-        "speed": 25
-    },
-    7: {
-        "label": "30_mph",
-        "speed": 30
-    },
-    8: {
-        "label": "35_mph",
-        "speed": 5
-    },
-    9: {
-        "label": "45_mph",
-        "speed": 5
-    },
-    10: {
-        "label": "50_mph",
-        "speed": 50
-    },
-    11: {
-        "label": "55_mph",
-        "speed": 55
-    },
-    12: {
-        "label": "60_mph",
+    "60": {
+        "label": "60_kph",
         "speed": 60
     },
-    13: {
-        "label": "65_mph",
-        "speed": 65
-    },
-    14: {
-        "label": "70_mph",
+    "70": {
+        "label": "70_kph",
         "speed": 70
     },
-    15: {
-        "label": "75_mph",
-        "speed": 75
+    "80": {
+        "label": "80_kph",
+        "speed": 80
+    },
+    "100": {
+        "label": "100_kph",
+        "speed": 100
+    },
+    "120": {
+        "label": "120_kph",
+        "speed": 120
+    },
+    "Deer": {
+        "label": "Deer",
+        "speed": 0
+    },
+    "Stop": {
+        "label": "Stop",
+        "speed": 0
+    },
+    "Yield": {
+        "label": "Yield",
+        "speed": 0
     }
 }
 
@@ -134,7 +114,7 @@ def on_message(msg):
         print("message received!")	
         msg = msg.payload  # create message
         print(msg)  # confirm message receipt, turn off for production
-        car.new_status(msg)  # change car status
+        car.new_status(keys[msg])  # change car status
     except:
         print("Unexpected error:", sys.exc_info()[0])
 
