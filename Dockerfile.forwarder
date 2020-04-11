@@ -11,6 +11,7 @@ RUN pip install paho-mqtt
 WORKDIR /
 
 COPY car_class.py /car_class.py
+COPY keys.json /keys.json
 
 ENTRYPOINT ["python", "car_class.py"]
 
