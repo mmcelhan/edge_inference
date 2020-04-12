@@ -6,7 +6,7 @@ RUN apt-get install -y python3-pip
 
 RUN pip3 install Pillow numpy paho-mqtt
 
-RUN apt-get install vim
+RUN apt-get install -y vim
 
 WORKDIR /
 

@@ -104,13 +104,13 @@ class Car:
         return None  # end new status
 
 
-def on_connect_local(client, rc):
-        print("connected to local broker with rc: " + str(rc))
-        client.subscribe(local_topic)  # subscribe to local topic
-        return None  # end function
+def on_connect_local(client, userdata, flags, rc):  
+    print("connected to local broker with rc: " + str(rc))
+    client.subscribe("signs")  # subscribe to local topic
+    return None  # end function
 
 
-def on_message(msg):
+def on_message(client,userdata, msg):
     try:
         print("message received!")	
         msg = msg.payload  # create message
@@ -124,7 +124,7 @@ def on_message(msg):
 car = Car()
 local_mqttclient = mqtt.Client()  # instantiate local client
 local_mqttclient.on_connect = on_connect_local  # connect using function call
-local_mqttclient.connect(local_broker, local_port, 60)  # connect with inputs
+local_mqttclient.connect("broker", local_port, 240)  # connect with inputs
 local_mqttclient.on_message = on_message  # execute when message is received
 
 # go into a loop

@@ -24,6 +24,11 @@ port = 1883
 # Message topic
 topic = "signs"
 
+
+client = mqtt.Client()
+client.connect("broker")
+#client.on_message = on_message
+
 # Define function to specify when the program is connected to host
 def on_message(client,userdata, msg):
   try:
@@ -31,9 +36,6 @@ def on_message(client,userdata, msg):
     # Throw Exception if there is an error
   except:
     print("Unexpected error:", sys.exc_info()[0])
-client = mqtt.Client()
-client.connect(host,port,60)
-client.on_message = on_message
 
 def run_inference(file):
     """ Opens the img file, runs it through the classifier and returns a class number (int)."""
