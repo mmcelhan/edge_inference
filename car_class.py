@@ -7,10 +7,7 @@ local_port = 1883  # standard mqtt port
 local_topic = "signs"  # topic is image
 
 with open("keys.json") as json_file:
-    data = json.load(json_file)
-    keys = {}
-    for i in range(len(data)):
-        keys[i] = data[str(i)]
+    keys = json.load(json_file)
 
 # dictionary of signs
 signs = {
@@ -113,9 +110,12 @@ def on_connect_local(client, userdata, flags, rc):
 def on_message(client,userdata, msg):
     try:
         print("message received!")	
-        msg = msg.payload  # create message
-        print(msg)  # confirm message receipt, turn off for production
-        car.new_status(keys[msg])  # change car status
+        msg = msg.payload.decode("utf-8")  # create message
+        #print(msg)  # confirm message receipt, turn off for production
+        #print("The corresponding key is ")
+        new_status = keys[msg]
+        #print(new_status)
+        car.new_status(new_status)  # change car status
     except:
         print("Unexpected error:", sys.exc_info()[0])
 
