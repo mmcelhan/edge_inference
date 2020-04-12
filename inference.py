@@ -7,7 +7,7 @@ import PIL.Image as Image
 import time
 
 # Load the model
-model = tf.keras.models.load_model('inception_augmented')
+model = tf.keras.models.load_model('model')
 
 # Set model requirements for image size
 IMG_HEIGHT = 299
@@ -37,7 +37,7 @@ client.on_message = on_message
 
 def run_inference(file):
     """ Opens the img file, runs it through the classifier and returns a class number (int)."""
-    sign = Image.open(file).resize((IMG_WIDTH,IMG_HEIGHT))
+    sign = Image.open(test_drive+"/"+file).resize((IMG_WIDTH,IMG_HEIGHT))
     sign.show() # Display the image being tested for audience.
     sign  = np.array(sign)/255.0
     result = model.predict(sign[np.newaxis, ...])
@@ -50,7 +50,7 @@ for img in os.listdir(test_drive):
     # Run prediction on image
     prediction = run_inference(img)
     # Publish the prediction onto the MQTT topic. Note it will arrive as type byte
-    client.publish(topic,prediction)
+    client.publish(topic,int(prediction))
     # Delay the loop to minimize lost packets on MQTT.
     time.sleep(0.5)
     
