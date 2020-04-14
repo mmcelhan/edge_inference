@@ -57,7 +57,8 @@ signs = {
 car_status = {
     1: "staying the same speed",
     2: "speeding up",
-    3: "slowing down"
+    3: "slowing down",
+    4: "stopping"
 }
 
 
@@ -92,6 +93,9 @@ class Car:
         elif new_speed == self.speed:
             print("staying the same speed")
             self.status = 1
+        elif new_speed == 0:
+            print("stopping the car")
+            self.status = 4
         else:
             print("speeding up")
             self.status = 2
