@@ -51,6 +51,8 @@ def run_inference(file):
 for img in os.listdir(test_drive):
     # Run prediction on image
     prediction = run_inference(img)
+    # Print the filename and predictoni
+    print("sign: ",img,",pred: ", int(prediction))
     # Publish the prediction onto the MQTT topic. Note it will arrive as type byte
     client.publish(topic,int(prediction))
     # Delay the loop to minimize lost packets on MQTT.
