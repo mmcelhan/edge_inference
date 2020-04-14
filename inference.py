@@ -10,8 +10,8 @@ import time
 model = tf.keras.models.load_model('model')
 
 # Set model requirements for image size
-IMG_HEIGHT = 299
-IMG_WIDTH = 299
+IMG_HEIGHT = 224
+IMG_WIDTH = 224
 
 # Set folder for testing images
 test_drive="test_route"
